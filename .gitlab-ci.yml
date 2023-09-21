@@ -16,6 +16,7 @@ install_dependencies:
   stage: install
   script:
     - npm install
+    - npm install -g ts-node
 
 playwright_test:
   stage: test
