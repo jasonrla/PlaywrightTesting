@@ -1,28 +1,24 @@
 stages:
+  - install
   - test
 
 variables:
   PLAYWRIGHT_BROWSERS_PATH: 0
+  SECURE_FILES_DOWNLOAD_PATH: 'src'
 
 cache:
   paths:
     - node_modules/
 
 install_dependencies:
-  stage: .pre
+  stage: install
   script:
     - npm install
 
 playwright_test:
   stage: test
-  variables:
-    SECURE_FILES_DOWNLOAD_PATH: 'src'
   script:
     - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
-    - npm install
     - npm install -g playwright
     - playwright install
     - ENV=PROD npx playwright test src/tests/Login/Login.spec.ts
-  only:
-    - merge_requests
-    - master
