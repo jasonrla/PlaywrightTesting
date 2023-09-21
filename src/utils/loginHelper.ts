@@ -29,7 +29,7 @@ function isValidConfig(obj: any): obj is ConfigStructure {
          'DEV' in obj && 'MX' in obj.DEV && isValidEnvironmentConfig(obj.DEV.MX);
 }
 
-const configPath = path.resolve('config.yml');
+const configPath = path.resolve('src/config.yml');
 const configContent = fs.readFileSync(configPath, 'utf8');
 const config = yaml.load(configContent) as ConfigStructure;
 
