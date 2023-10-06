@@ -1,36 +1,31 @@
-image: node:14
+image: mcr.microsoft.com/playwright:latest
 
 stages:
-  - install
   - test
-
-variables:
-  PLAYWRIGHT_BROWSERS_PATH: 0
-  SECURE_FILES_DOWNLOAD_PATH: 'src'
 
 cache:
   paths:
     - node_modules/
 
 install_dependencies:
-  stage: install
-  script:
-    - npm install
-    - npm install -g ts-node
-    - npm install js-yaml
-    - npm install playwright
-    - npm install ts-node --save-dev
-    - npm install @types/js-yaml --save-dev
-    - npm install playwright @playwright/test
-
-playwright_test:
   stage: test
   script:
+    - npm install
+  only:
+    - master
+
+run_tests_prod:
+  stage: test
+  variables:
+    SECURE_FILES_DOWNLOAD_PATH: 'src'
+  script:
     - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
-    - npm install js-yaml
-    - npm install -g playwright
-    - npm install ts-node --save-dev
-    - npm install @types/js-yaml --save-dev
-    - npm install playwright @playwright/test
-    - playwright install
-    - ENV=PROD npx playwright test src/tests/Login/Login.spec.ts
+    - npm run test:prod
+
+run_tests_dev:
+  stage: test
+  variables: 
+    SECURE_FILES_DOWNLOAD_PATH: 'src'
+  script:
+    - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
+    - npm run test:dev
