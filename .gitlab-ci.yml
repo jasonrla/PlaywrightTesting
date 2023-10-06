@@ -21,10 +21,6 @@ run_tests_prod:
   script:
     - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
     - npm run test:prod
-  artifacts:
-    paths:
-      - test-results/
-    expire_in: 1 week
 
 run_tests_dev:
   stage: test
@@ -33,7 +29,4 @@ run_tests_dev:
   script:
     - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
     - npm run test:dev
-  artifacts:
-    paths:
-      - test-results/
-    expire_in: 1 week
+  
