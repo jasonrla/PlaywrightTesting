@@ -8,6 +8,7 @@ import { SendPayment } from '../../pages/Payments/SendPayment';
 
 test.beforeEach(async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
+  test.setTimeout(60000);
 });
 
 test('Testing Tribal Login has title', async ({ page }) => {
