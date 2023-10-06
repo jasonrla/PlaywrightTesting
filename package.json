@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-   
+    "test:prod": "ENV=PROD npx playwright test src/tests/Login/Login.spec.ts",
+    "test:dev": "ENV=DEV npx playwright test src/tests/Login/Login.spec.ts"
   },
   "keywords": [],
   "author": "",
