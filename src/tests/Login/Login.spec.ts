@@ -12,13 +12,15 @@ test.beforeEach(async ({ page }) => {
 
 test('Testing Tribal Login has title', async ({ page }) => {
   const env = process.env.ENV || 'DEV';
-  await page.goto(await getURL(env));
+  const url = await getURL(env);
+  await page.goto(url);
   await expect(page).toHaveTitle(/Tribal/);
 });
 
 test('Testing login with no credentials', async ({ page }) => {
   const env = process.env.ENV || 'DEV';
-  await page.goto(await getURL(env));
+  const url = await getURL(env);
+  await page.goto(url);
   await page.getByRole('button', { name: 'Sign in' }).click();
   await expect(page.getByText('Please enter your email')).toBeVisible();
   await expect(page.getByText('Please enter a password')).toBeVisible();
