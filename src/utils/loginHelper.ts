@@ -59,3 +59,14 @@ export async function login(page: Page, env: string) {
   await page.getByPlaceholder('Password').fill(password);
   await page.getByRole('button', { name: 'Sign in' }).click();
 }
+
+export async function getURL(env: string) {
+  let url='';
+  if(env == 'DEV'){
+    url = 'https://dev.app.tribalcredit.io/login';
+  }
+  else if(env == 'PROD'){
+    url = 'https://app.tribalcredit.io/login';
+  }
+  return url;
+}
