@@ -34,10 +34,12 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Testing Tribal Login has title', async ({ page }) => {
+  await page.goto("https://dev.app.tribalcredit.io/login");
   await expect(page).toHaveTitle(/Tribal/);
 });
 
 test('Testing login with no credentials', async ({ page }) => {
+  await page.goto("https://dev.app.tribalcredit.io/login");
   await page.getByRole('button', { name: 'Sign in' }).click();
   await expect(page.getByText('Please enter your email')).toBeVisible();
   await expect(page.getByText('Please enter a password')).toBeVisible();
