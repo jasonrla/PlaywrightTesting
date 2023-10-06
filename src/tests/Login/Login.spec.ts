@@ -1,70 +1,34 @@
 import { test, expect } from '@playwright/test';
 import { login } from '../../utils/loginHelper';
-import { getURL } from '../../utils/loginHelper';
 import { Login } from '../../pages/Login';
 import { Dashboard } from '../../pages/Dashboard';
 import { Transactions } from '../../pages/Payments/Transactions';
 import { SendPayment } from '../../pages/Payments/SendPayment';
-import fs from 'fs';
-import path from 'path';
-import yaml from 'js-yaml';
-
-let env: string;
-let url;
-
-interface EnvironmentConfig {
-  url: string;
-  email: string;
-  password: string;
-}
-
-interface ConfigStructure {
-  PROD: EnvironmentConfig;
-  DEV: {
-    MX: EnvironmentConfig;
-  };
-}
 
 test.beforeEach(async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  test.setTimeout(60000);
-  env = process.env.ENV || 'DEV';
-  url = await getURL(env);
-  await page.goto(url);
 });
 
-test('Testing Tribal Login has title', async ({ page }) => {
-  await page.goto("https://dev.app.tribalcredit.io/login");
+test('has title', async ({ page }) => {
+  await page.goto('https://dev.app.tribalcredit.io/login');
+
+  // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Tribal/);
 });
 
-test('Testing login with no credentials', async ({ page }) => {
-  await page.goto("https://dev.app.tribalcredit.io/login");
+test('Sign in with no credentials', async ({ page }) => {
+  await page.goto('https://dev.app.tribalcredit.io/login');
+
+  // Click the get started link.
   await page.getByRole('button', { name: 'Sign in' }).click();
+
+  // Expects page to have a heading with the name of Installation.
   await expect(page.getByText('Please enter your email')).toBeVisible();
   await expect(page.getByText('Please enter a password')).toBeVisible();
+
 });
 
-test('Testing Login in '+ process.env.ENV, async ({ page }) => {
-  const configPath = path.resolve('src/config.yml');
-  const configContent = fs.readFileSync(configPath, 'utf8');
-  const config = yaml.load(configContent) as ConfigStructure;
-
-  let email: string;
-  let password: string;
-
-  if (process.env.ENV === "PROD") {
-    email = config.PROD.email;
-    password = config.PROD.password;
-  } else if (process.env.ENV === "DEV") {
-    email = config.DEV.MX.email;
-    password = config.DEV.MX.password;
-  } else {
-    throw new Error(`Invalid environment: ${process.env.ENV}`);
-  }
-
-  await page.getByPlaceholder('Email').fill(email);
-  await page.getByPlaceholder('Password').fill(password);
-  await page.getByRole('button', { name: 'Sign in' }).click();
-
+test('Login '+ process.env.ENV, async ({ page }) => {
+  const env = process.env.ENV || 'DEV';
+  await login(page, env);
 });
