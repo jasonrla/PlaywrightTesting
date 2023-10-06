@@ -9,7 +9,7 @@ import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 
-let env: any;
+let env: string;
 let url;
 
 interface EnvironmentConfig {
@@ -43,7 +43,7 @@ test('Testing login with no credentials', async ({ page }) => {
   await expect(page.getByText('Please enter a password')).toBeVisible();
 });
 
-test('Testing Login in '+ env, async ({ page }) => {
+test('Testing Login in '+ process.env.ENV, async ({ page }) => {
   const configPath = path.resolve('src/config.yml');
   const configContent = fs.readFileSync(configPath, 'utf8');
   const config = yaml.load(configContent) as ConfigStructure;
@@ -51,14 +51,14 @@ test('Testing Login in '+ env, async ({ page }) => {
   let email: string;
   let password: string;
 
-  if (env === "PROD") {
+  if (process.env.ENV === "PROD") {
     email = config.PROD.email;
     password = config.PROD.password;
-  } else if (env === "DEV") {
+  } else if (process.env.ENV === "DEV") {
     email = config.DEV.MX.email;
     password = config.DEV.MX.password;
   } else {
-    throw new Error(`Invalid environment: ${env}`);
+    throw new Error(`Invalid environment: ${process.env.ENV}`);
   }
 
   await page.getByPlaceholder('Email').fill(email);
