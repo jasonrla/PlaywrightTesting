@@ -11,9 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@playwright/test": "^1.37.1",
+    "@playwright/test": "^1.38.0",
     "js-yaml": "^4.1.0",
-    "playwright": "^1.37.1"
+    "playwright": "^1.38.0"
   },
   "type": "module"
 }

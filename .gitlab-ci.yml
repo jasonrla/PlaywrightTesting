@@ -1,4 +1,4 @@
-image: mcr.microsoft.com/playwright:latest
+image: mcr.microsoft.com/playwright:v1.38.0-jammy
 
 stages:
   - test
@@ -10,9 +10,8 @@ cache:
 install_dependencies:
   stage: test
   script:
-    - npm install
-  only:
-    - master
+    - npm install -D @playwright/test
+    - npm ci 
 
 run_tests_prod:
   stage: test
@@ -21,6 +20,12 @@ run_tests_prod:
   script:
     - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
     - npm run test:prod
+  artifacts:
+    paths:
+      - ./playwright-report/
+      - ./Screenshot/
+    when: always
+    expire_in: 4 days
 
 run_tests_dev:
   stage: test
@@ -29,4 +34,11 @@ run_tests_dev:
   script:
     - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
     - npm run test:dev
+  artifacts:
+    paths:
+      - ./playwright-report/
+      - ./Screenshot/
+    when: always
+    expire_in: 4 days
+
   
