@@ -1,12 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { login } from '../../utils/loginHelper';
 import { Login } from '../../pages/Login';
-import { Dashboard } from '../../pages/Dashboard';
-import { Transactions } from '../../pages/Payments/Transactions';
-import { SendPayment } from '../../pages/Payments/SendPayment';
 
 test.beforeEach(async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 900 });
+  //await page.setViewportSize({ width: 1440, height: 900 });
 });
 
 test('has title', async ({ page }) => {

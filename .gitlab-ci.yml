@@ -1,44 +1,33 @@
-image: mcr.microsoft.com/playwright:v1.38.0-jammy
-
 stages:
-  - test
+  - install
+  - build
+  - deploy
+  - e2e
 
-cache:
-  paths:
-    - node_modules/
-
-install_dependencies:
-  stage: test
+test_e2e:
+  stage: e2e
+  allow_failure: false
+  image: mcr.microsoft.com/playwright:focal
+  before_script:
+    - cd playwright
+    - npm i
+    - npx playwright install
   script:
-    - npm install -D @playwright/test
-    - npm ci 
-
-run_tests_prod:
-  stage: test
-  variables:
-    SECURE_FILES_DOWNLOAD_PATH: 'src'
-  script:
-    - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
-    - npm run test:prod
-  artifacts:
-    paths:
-      - ./playwright-report/
-      - ./Screenshot/
-    when: always
-    expire_in: 4 days
-
-run_tests_dev:
-  stage: test
-  variables: 
-    SECURE_FILES_DOWNLOAD_PATH: 'src'
-  script:
-    - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
     - npm run test:dev
+  after_script:
+    - >
+      if [ $CI_JOB_STATUS == 'failed' ]; then
+        echo "At least one test suite has failed, returning"
+        echo "Go check test results here:"
+        echo "$CI_JOB_URL/artifacts/file/playwright/out/report/index.html"
+      fi
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-e2e
+    paths:
+      - playwright/node_modules
   artifacts:
     paths:
-      - ./playwright-report/
-      - ./Screenshot/
-    when: always
-    expire_in: 4 days
-
-  
+      - playwright/out/report/
+    when: on_failure
+    reports:
+      junit: playwright/out/report/report.xml
