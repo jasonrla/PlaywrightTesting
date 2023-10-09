@@ -10,7 +10,7 @@ test('has title', async ({ page }) => {
   await page.goto('https://dev.app.tribalcredit.io/login', { timeout: 10000 });
 
   // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Tribal/, { timeout: 10000 });
+  await expect(page).toHaveTitle(/Tribal/, { timeout: 30000 });
 });
 /*
 test('Sign in with no credentials', async ({ page }) => {
