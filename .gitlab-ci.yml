@@ -7,7 +7,6 @@ run_tests_dev:
   variables: 
     SECURE_FILES_DOWNLOAD_PATH: 'src'
   script:
-    - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
     - npm install -D @playwright/test
     - npm ci
     - npm run test:dev
