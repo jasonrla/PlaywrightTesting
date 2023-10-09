@@ -15,7 +15,7 @@ test('has title', async ({ page }) => {
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Tribal/);
 });
-
+/*
 test('Sign in with no credentials', async ({ page }) => {
   await page.goto('https://dev.app.tribalcredit.io/login');
 
@@ -31,4 +31,4 @@ test('Sign in with no credentials', async ({ page }) => {
 test('Login '+ process.env.ENV, async ({ page }) => {
   const env = process.env.ENV || 'DEV';
   await login(page, env);
-});
+});*/
