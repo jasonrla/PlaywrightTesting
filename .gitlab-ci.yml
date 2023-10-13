@@ -27,7 +27,7 @@ run_tests_prod:
     - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
     - npm install -D @playwright/test
     - npm ci
-    - BROWSERS=$PLAYWRIGHT_BROWSERS npm run test:prod
+    - BROWSERS=$PLAYWRIGHT_BROWSERS npm run test:prod --reporter=list
   artifacts:
     paths:
       - ./playwright-report/
