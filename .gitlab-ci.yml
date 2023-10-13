@@ -3,7 +3,7 @@ stages:
 
 run_tests_dev:
   stage: test
-  image: mcr.microsoft.com/playwright:v1.38.0-jammy
+  image: mcr.microsoft.com/playwright:v1.39.0-jammy 
   variables: 
     SECURE_FILES_DOWNLOAD_PATH: 'src'
     PLAYWRIGHT_BROWSERS: 'chromium,firefox'
