@@ -24,8 +24,8 @@ test('Sign in with no credentials', async ({ page }) => {
   await expect(page.getByText('Please enter a password')).toBeVisible();
 
 });
-/*
+
 test('Login '+ process.env.ENV, async ({ page }) => {
   const env = process.env.ENV || 'DEV';
   await login(page, env);
-});*/
+});
