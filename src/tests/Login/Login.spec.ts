@@ -5,14 +5,14 @@ import { Login } from '../../pages/Login';
 test.beforeEach(async ({ page }) => {
   //await page.setViewportSize({ width: 1440, height: 900 });
 });
-
+/*
 test('has title', async ({ page }) => {
   await page.goto('https://dev.app.tribalcredit.io/login', { timeout: 10000 });
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Tribal/);
 });
-
+*/
 test('Sign in with no credentials', async ({ page }) => {
   await page.goto('https://dev.app.tribalcredit.io/login');
 

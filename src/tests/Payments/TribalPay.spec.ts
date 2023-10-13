@@ -46,7 +46,7 @@ test('Make a Bulk Payment', async ({ page }) => {
 
 });
 
-/*
+
 test('Local Payment', async ({ page }) => {
   const dashboard = new Dashboard(page);
   const transaction = new Transactions(page);
@@ -58,27 +58,6 @@ test('Local Payment', async ({ page }) => {
   await page.getByRole('button', { name: 'Tribal Pay' }).click();
   await page.getByRole('link', { name: 'Transactions' }).click();
 
-  const selector = 'p.chakra-text.css-ucnxlx';
-
-  const element = await page.$(selector);
-  let fullText: string = '';
-  
-  if (element) {
-    fullText = await element.innerText();
-  }
-
-  const regex = /([\d,]+.\d{2})/;  // Expresión regular para capturar números con comas y decimales
-  const match = fullText.match(regex);
-  console.log("match: "+match);
-  let initialAmount: number = 0;
-
-  if (match) {
-    initialAmount = parseFloat(match[1].replace(/,/g, ''));  
-  }
-
-  console.log(`Monto inicial: ${initialAmount}`);
-
-  //await page.getByText('3,346,878.92 MXN').click();
   await page.getByRole('button', { name: 'Send Payment' }).click();
   await page.getByText('International').click();
   await page.locator('div').filter({ hasText: /^Local$/ }).click();
