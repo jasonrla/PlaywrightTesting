@@ -6,12 +6,28 @@ run_tests_dev:
   image: mcr.microsoft.com/playwright:v1.39.0-jammy 
   variables: 
     SECURE_FILES_DOWNLOAD_PATH: 'src'
-    PLAYWRIGHT_BROWSERS: 'chromium,firefox'
   script:
     - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
     - npm install -D @playwright/test
     - npm ci
     - BROWSERS=$PLAYWRIGHT_BROWSERS npm run test:dev
+  artifacts:
+    paths:
+      - ./playwright-report/
+      - ./Screenshot/
+    when: always
+    expire_in: 4 days
+
+run_tests_prod:
+  stage: test
+  image: mcr.microsoft.com/playwright:v1.39.0-jammy 
+  variables: 
+    SECURE_FILES_DOWNLOAD_PATH: 'src'
+  script:
+    - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
+    - npm install -D @playwright/test
+    - npm ci
+    - BROWSERS=$PLAYWRIGHT_BROWSERS npm run test:prod
   artifacts:
     paths:
       - ./playwright-report/
