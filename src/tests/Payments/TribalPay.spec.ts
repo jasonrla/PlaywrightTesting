@@ -80,4 +80,3 @@ test('Local Payment', async ({ page }) => {
   await page.getByText('3,346,278.92 MXN').click();
   
 });
-*/
