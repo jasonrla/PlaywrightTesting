@@ -22,7 +22,7 @@ test('Sign in with no credentials', async ({ page }) => {
 
 });
 
-test('Login '+ process.env.ENV, async ({ page }) => {
+test('[International payment] Check "Confirm button" is enabled in '+ process.env.ENV + ' environment', async ({ page }) => {
   const env = process.env.ENV || 'PROD';
   await login(page, env);
   await page.getByRole('button', { name: 'Tribal Pay' }).click({timeout: 10000});
@@ -41,6 +41,32 @@ test('Login '+ process.env.ENV, async ({ page }) => {
   await expect(page.getByRole('button', { name: 'Next' })).toBeEnabled();
   await page.getByRole('button', { name: 'Next' }).click();
   await page.locator('.chakra-checkbox__control').first().click();
+  await page.locator('div:nth-child(10) > .chakra-checkbox > .chakra-checkbox__control').click();
+  await expect(page.getByRole('button', { name: 'Confirm Payment' })).toBeEnabled();
+});
+
+test('[Local payment] Check "Confirm button" is enabled in '+ process.env.ENV + ' environment', async ({ page }) => {
+  const env = process.env.ENV || 'DEV';
+  await login(page, env);
+  await page.getByRole('button', { name: 'Tribal Pay' }).click({timeout: 10000});
+  await page.getByRole('link', { name: 'Transactions' }).click();
+  await page.getByRole('button', { name: 'Send Payment' }).click();
+  await page.getByText('International').click();
+  await page.locator('div').filter({ hasText: /^Local$/ }).click();
+  await page.getByText('Please type the name of the recipient you want to use or create').click();
+  const beneficiary = (env === 'DEV')? 'Local beneficiary 44397875' : 'Local beneficiary 49017245';
+  await page.getByText(beneficiary).click();
+  await page.getByRole('button', { name: 'Next' }).click();
+  await page.getByRole('button', { name: 'Next' }).click();
+  await sleep(2000);
+  await page.locator('div').filter({ hasText: /^AmountMXNUSD \$0\.00$/ }).getByRole('textbox').click();
+  await page.locator('div').filter({ hasText: /^AmountMXNUSD \$0\.00$/ }).getByRole('textbox').fill('100');
+  await page.locator('#field-18').click();
+  await page.locator('#field-18').fill('testing');
+  await page.locator('#field-19').click();
+  await page.locator('#field-19').fill('12345');
+  await page.getByRole('button', { name: 'Next' }).click();
+  await page.locator('label').first().click();
   await page.locator('div:nth-child(10) > .chakra-checkbox > .chakra-checkbox__control').click();
   await expect(page.getByRole('button', { name: 'Confirm Payment' })).toBeEnabled();
 });
