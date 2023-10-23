@@ -29,7 +29,8 @@ test('Login '+ process.env.ENV, async ({ page }) => {
   await page.getByRole('link', { name: 'Transactions' }).click();
   await page.getByRole('button', { name: 'Send Payment' }).click();
   await page.locator('div').filter({ hasText: /^Please type the name of the recipient you want to use or create$/ }).nth(1).click();
-  await page.getByText('Int beneficiary 53345340').click();
+  const beneficiary = (env === 'DEV')? 'Int beneficiary 53345340' : 'Int beneficiary 25692208';
+  await page.getByText(beneficiary).click();
   await page.getByRole('button', { name: 'Next' }).click();
   await page.getByRole('button', { name: 'Next' }).click();
   await sleep(2000);
