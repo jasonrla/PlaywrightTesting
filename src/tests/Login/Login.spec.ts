@@ -23,9 +23,9 @@ test('Sign in with no credentials', async ({ page }) => {
 });
 
 test('Login '+ process.env.ENV, async ({ page }) => {
-  const env = process.env.ENV || 'DEV';
+  const env = process.env.ENV || 'PROD';
   await login(page, env);
-  await page.getByRole('button', { name: 'Tribal Pay' }).click();
+  await page.getByRole('button', { name: 'Tribal Pay' }).click({timeout: 10000});
   await page.getByRole('link', { name: 'Transactions' }).click();
   await page.getByRole('button', { name: 'Send Payment' }).click();
   await page.locator('div').filter({ hasText: /^Please type the name of the recipient you want to use or create$/ }).nth(1).click();
@@ -35,7 +35,7 @@ test('Login '+ process.env.ENV, async ({ page }) => {
   await page.getByRole('button', { name: 'Next' }).click();
   await sleep(2000);
   await page.locator('div').filter({ hasText: /^AmountUSDUSD \$0\.00$/ }).getByRole('textbox').click();
-  await page.locator('div').filter({ hasText: /^AmountUSDUSD \$0\.00$/ }).getByRole('textbox').fill('70');
+  await page.locator('div').filter({ hasText: /^AmountUSDUSD \$0\.00$/ }).getByRole('textbox').fill('5');
   await page.locator('#field-23').click();
   await page.locator('#field-23').fill('testing');
   await expect(page.getByRole('button', { name: 'Next' })).toBeEnabled();
