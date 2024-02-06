@@ -4,16 +4,34 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:prod": "ENV=PROD npx playwright test src/tests/Login/Login.spec.ts",
-    "test:dev": "ENV=DEV npx playwright test src/tests/Login/Login.spec.ts"
+    "report": "npx playwright show-report",
+    "all": "npx playwright test src/tests",
+    "login": "ENVIRONMENT=prod npx playwright test src/tests/login.spec.ts -g 'Test the error message when invalid email is entered' --project='firefox-english' --reporter=html",
+    "payments": "npx playwright test src/tests/payments.spec.ts --reporter=html",
+    "2fa": "npx playwright test -g '2FA tests' --reporter=html",
+    "login-tests": "npx playwright test -g 'Login verifications' --reporter=html",
+    "support": "npx playwright test -g 'Login support links' --reporter=html",
+    "testss": "npm run 2fa && npm run login-tests && npm run support",
+    "test2": "npx playwright test src/tests/payments.spec.ts --reporter=html",
+    "prod2": "ENVIRONMENT=prod npx playwright test src/tests/payments.spec.ts --project='firefox-english' --reporter=html",
+    "prod": "ENVIRONMENT=prod npx playwright test -g 'Make a local payment to an new vendor' src/tests/payments.spec.ts --project='firefox-english' --reporter=html",
+    "tests": "npx playwright test src/tests/tests.spec.ts --reporter=html"
+
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@playwright/test": "^1.38.0",
     "js-yaml": "^4.1.0",
-    "playwright": "^1.38.0"
+    "playwright": "^1.38.0",
+    "xlsx": "^0.18.5"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "^1.41.0",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.56.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
 }

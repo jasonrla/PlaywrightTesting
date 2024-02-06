@@ -1,15 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
-
-/**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  timeout: 60000,
   testDir: './src/tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -23,30 +18,43 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    //offline: false,
+
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
-
+    //baseURL: selectedConfig.baseUrl,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    
+    //locale: process.env.LOCALE || 'en-US',
+    //timezoneId: process.env.TIMEZONEID || 'Asia/Dubai',
+    
+    //locale: process.env.LOCALE || 'en-SA', 
+    //timezoneId: process.env.TIMEZONEID || 'Asia/Riyadh',
+
+    //locale: process.env.LOCALE || 'en-US', 
+    //timezoneId: process.env.TIMEZONEID || 'America/New_York',
+
+    locale: process.env.LOCALE || 'es-MX',
+    timezoneId: process.env.TIMEZONEID || 'America/Mexico_City',
+    
     trace: 'on-first-retry',
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-
-    {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
- /*
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
-
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
+ 
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',

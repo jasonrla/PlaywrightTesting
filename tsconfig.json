@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
-      "target": "ES6",
-      "module": "CommonJS",
+      "moduleResolution": "node",
+      "target": "es2017",
+      "module": "es2022",
       "strict": true,
       "esModuleInterop": true,
       "skipLibCheck": true,
@@ -10,8 +11,8 @@
       "rootDir": "./src"
     },
     "include": [
-      "src/**/*.ts"
-    ],
+      "./src/**/*.ts"
+, "src/fixture.config.ts"    ],
     "exclude": [
       "node_modules"
     ]
