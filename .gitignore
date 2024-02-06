@@ -3,4 +3,19 @@ node_modules/
 /playwright-report/
 /playwright/.cache/
 config.yml
-*.json
+.eslintrc.json
+
+# dotenv environment variables file
+.env
+
+# GitHub Workflows
+.github/workflows/*.log
+.github/workflows/*.yml
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace

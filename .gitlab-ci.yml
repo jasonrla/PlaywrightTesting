@@ -5,29 +5,12 @@ run_tests_dev:
   stage: test
   image: mcr.microsoft.com/playwright:v1.39.0-jammy 
   variables: 
-    SECURE_FILES_DOWNLOAD_PATH: 'src'
+    SECURE_FILES_DOWNLOAD_PATH: '.'
   script:
     - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
     - npm install -D @playwright/test
     - npm ci
-    - npm run test:dev
-  artifacts:
-    paths:
-      - ./playwright-report/
-      - ./Screenshot/
-    when: always
-    expire_in: 4 days
-
-run_tests_prod:
-  stage: test
-  image: mcr.microsoft.com/playwright:v1.39.0-jammy 
-  variables: 
-    SECURE_FILES_DOWNLOAD_PATH: 'src'
-  script:
-    - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
-    - npm install -D @playwright/test
-    - npm ci
-    - npm run test:prod
+    - npm run all
   artifacts:
     paths:
       - ./playwright-report/
