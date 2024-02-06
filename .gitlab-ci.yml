@@ -3,7 +3,7 @@ stages:
 
 run_tests_dev:
   stage: test
-  image: mcr.microsoft.com/playwright:v1.39.0-jammy 
+  image: mcr.microsoft.com/playwright:v1.41.2-jammy 
   variables: 
     SECURE_FILES_DOWNLOAD_PATH: '.'
   script:
