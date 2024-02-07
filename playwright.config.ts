@@ -28,14 +28,14 @@ export default defineConfig({
     //locale: process.env.LOCALE || 'en-US',
     //timezoneId: process.env.TIMEZONEID || 'Asia/Dubai',
     
-    //locale: process.env.LOCALE || 'en-SA', 
-    //timezoneId: process.env.TIMEZONEID || 'Asia/Riyadh',
+    locale: process.env.LOCALE || 'en-SA', 
+    timezoneId: process.env.TIMEZONEID || 'Asia/Riyadh',
 
     //locale: process.env.LOCALE || 'en-US', 
     //timezoneId: process.env.TIMEZONEID || 'America/New_York',
 
-    locale: process.env.LOCALE || 'es-MX',
-    timezoneId: process.env.TIMEZONEID || 'America/Mexico_City',
+    //locale: process.env.LOCALE || 'es-MX',
+    //timezoneId: process.env.TIMEZONEID || 'America/Mexico_City',
     
     trace: 'on-first-retry',
   },

@@ -132,10 +132,99 @@ export default {
     ]
   },
   cardData: {
-    cardName: 'Dev Card Name',
-    validCardNumber: '1234567812345678',
-    invalidCardNumber: '1234',
-    // ... otras propiedades de tarjeta
+    cardId: '84ae761b-24f7-488f-a47e-adf2733d2f8e',
+    transactRequest: {
+      "auth_type": "Auth",
+      "ecommerce": {
+          "is_ecommerce": false
+      },
+      "validation_results": {
+          "arqc": "Y",
+          "cvv3": "N",
+          "pin": "N",
+          "avs_result": "B",
+          "aav": "N",
+          "cvv1": "Y",
+          "offline_pin": "N",
+          "cvv2": "N"
+      },
+      "id": "SwwYqn4lSg66WHRFVKlmtw",
+      "emv": {
+          "brand": "visa",
+          "terminal_verification_results": {
+              "pin_required_no_pad_or_bad_pad": true,
+              "cardholder_verification_not_successful": false,
+              "raw": "8080108000",
+              "online_pin_entered": false,
+              "pin_try_limit_exceeded": false,
+              "pin_required_pad_pres_but_no_pin_entered": false
+          },
+          "is_emv": true
+      },
+      "network": "Mastercard",
+      "amounts": {
+          "cashback_amount": "0.0",
+          "local_currency_amount": "localCurrency",
+          "trans_amount": "transAmount",
+          "settle_currency_amount": "46.96",
+          "available_funds": "767.49",
+          "settle_exchange_rate": "61000000",
+          "currency": "currency",
+          "amt_til_limit": "4930.42",
+          "settle_currency": "840",
+          "local_currency": "840",
+          "exchange_rate": "2",
+          "fee_amount": "0.00"
+      },
+      "auth_id": 1513795,
+      "risk_score": "None",
+      "version": "3.0",
+      "international": false,
+      "merchant": {
+          "merchant_country": "840",
+          "terminal_network": null,
+          "terminal_id": "13400050",
+          "merchant_state": "GA",
+          "acquirer_id": "555555",
+          "merchant_description": "Wal-Mart Super Center  ",
+          "merchant_id": "A100100100",
+          "merchant_postal_code": "30038"
+      },
+      "eligible_for_balance_return": false,
+      "pin_entry_capability": "Capable",
+      "timestamp": "20210813:063838MST",
+      "response_code_objects": {},
+      "mcc": 5411,
+      "original_id": 0,
+      "account": {
+          "xid": 222222,
+          "expiration_date": "2405",
+          "prn": "777777777777",
+          "card_status": "N",
+          "merchant_supplied_expiration_date": null,
+          "account_status": "N",
+          "track_expiration_date": "2405",
+          "pan": "lastFourDigits",
+          "cad": "issuerCardId" //number
+      },
+      "transaction": {
+          "cardholder_present": "Y",
+          "recurring": "N"
+      },
+      "entry_type": "EMV Chip",
+      "response_code": "00",
+      "transaction_type": "Auth",
+      "mti": "0200",
+      "partial_supported": false,
+      "subnetwork": "Mastercard Debit Switch",
+      "bai": null
+    }
+  },
+  files:{
+    PDF: 'PDF_receipt.pdf',
+    PNG: 'PNG_receipt.png',
+    JPG: 'JPG_receipt.jpg',
+    XML: 'XML_receipt.xml',
   },
   paymentData: {
     // datos para pagos en dev

@@ -29,6 +29,18 @@ export const dashboard: Record<string, Record<LanguageKey, string>> = {
         "english": "Reports",
         "spanish": "Reportes"
     },
+    Filters: {
+        "english": "Filters",
+        "spanish": "Filtros"
+    },
+    FilterByType: {
+        "english": "Type",
+        "spanish": "Tipo"
+    },
+    FilterByCards: {
+        "english": "Cards",
+        "spanish": "Tarjetas"
+    },
 }
 
 export const dashboard_tribalPay: Record<string, Record<LanguageKey, string>> = {

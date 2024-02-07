@@ -85,5 +85,21 @@ export default class Dashboard {
     async goToInvitationsOption() {
         await this.page.getByRole('link', { name: sel.dashboard_cards.Invitations[this.language] }).click();
     }
-       
+
+    async clickOnFiltersButton() {
+        await this.page.getByRole('button', { name: sel.dashboard.Filters[this.language] }).click();
+    }
+     
+    async filterByType() {
+        await this.page.getByRole('menuitemradio', { name: sel.dashboard.FilterByType[this.language] }).click();
+    }
+    
+    async filterByCards() {
+        await this.page.getByRole('menuitemradio', { name: sel.dashboard.FilterByCards[this.language] }).click();
+        await this.page.waitForTimeout(3000);
+    }
+
+    async clickOnFirstCardTransaction(amount: string) {
+        await this.page.getByText(amount).first().click();
+    }
 }

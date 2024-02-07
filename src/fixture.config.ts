@@ -7,8 +7,18 @@ import SendPaymentPage from './pages/SendPaymentPage';
 import TransactionsPage from './pages/TransactionsPage';
 import VendorsPage from './pages/VendorsPage';
 import BillsPage from './pages/BillsPage';
+import TransactionDetailsPage from './pages/TransactionDetails';
 
-const test = baseTest.extend<{ language: LanguageKey, loginPage: LoginPage, dashboardPage: DashboardPage, sendPaymentPage: SendPaymentPage, transactionsPage: TransactionsPage, vendorsPage: VendorsPage, billsPage: BillsPage }>({
+const test = baseTest.extend<{ 
+  language: LanguageKey, 
+  loginPage: LoginPage, 
+  dashboardPage: DashboardPage, 
+  sendPaymentPage: SendPaymentPage, 
+  transactionsPage: TransactionsPage, 
+  vendorsPage: VendorsPage, 
+  billsPage: BillsPage, 
+  transactionDetailsPage: TransactionDetailsPage }>({
+  
   language: async ({}, use) => {
     const locale = test.info().project.use.locale;
     let language: LanguageKey;
@@ -38,6 +48,10 @@ const test = baseTest.extend<{ language: LanguageKey, loginPage: LoginPage, dash
   billsPage: async ({ page, language }, use) => {
     const billsPage = new BillsPage(page, language);
     await use(billsPage);
+  },
+  transactionDetailsPage: async ({ page, language }, use) => {
+    const transactionDetailsPage = new TransactionDetailsPage(page, language);
+    await use(transactionDetailsPage);
   }
 
 });

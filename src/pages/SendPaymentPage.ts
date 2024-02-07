@@ -2,7 +2,7 @@ import { Page } from 'playwright';
 import { LanguageKey } from '../utils/utils';
 import { config }  from '../utils/configLoader';
 import * as sel from '../selectors/SendPaymentSelector';
-import { generateXlsx } from '../utils/utils';
+import { generateXlsx, dataPath} from '../utils/utils';
 
 export default class SendPayment {
     private page: Page;
@@ -174,7 +174,7 @@ export default class SendPayment {
     }
 
     async uploadXlsxFile(fileName: string) {
-        const filePath: string = 'src/data/'+fileName;
+        const filePath: string =  dataPath + fileName;
         const [fileChooser] = await Promise.all([
             this.page.waitForEvent('filechooser'),
             await this.page.getByRole('button', { name: sel.send_payment.UploadDocument[this.language] }).click()
