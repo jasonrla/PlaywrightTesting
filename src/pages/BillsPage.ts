@@ -32,7 +32,7 @@ export default class Bills {
     }
 
     async fillAmount(amount: string): Promise<void> {
-        await this.page.getByText('0.00').click();
+        await this.page.getByText('0.00').first().click();
         await this.page.getByLabel(sel.bills.AmountToPay[this.language]).fill(amount);
     }
 

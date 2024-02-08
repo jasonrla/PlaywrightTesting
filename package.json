@@ -15,6 +15,7 @@
     "test2": "npx playwright test src/tests/payments.spec.ts --reporter=html",
     "prod2": "ENVIRONMENT=prod npx playwright test src/tests/payments.spec.ts --project='firefox-english' --reporter=html",
     "prod": "ENVIRONMENT=prod npx playwright test -g 'Make a local payment to an new vendor' src/tests/payments.spec.ts --project='firefox-english' --reporter=html",
+    "cardDetails": "npx playwright test src/tests/dashboard_transcDetails.spec.ts --reporter=html",
     "tests": "npx playwright test src/tests/tests.spec.ts --reporter=html"
   },
   "keywords": [],

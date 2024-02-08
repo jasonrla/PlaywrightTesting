@@ -33,7 +33,7 @@ export default class Transactions {
     }
 
     async isAmountAndCurrencyCorrect(amount: string, currency: string): Promise<boolean> {
-        await this.page.waitForTimeout(5000);
+        await this.page.waitForTimeout(2000); //5000
         await this.page.waitForSelector(`text=${currency}`);
         const element = await this.page.getByRole('gridcell', { name: currency }).first();
         const text = await element.innerText();
@@ -47,7 +47,7 @@ export default class Transactions {
     }
 
     async filterTodayTransactions(): Promise<void> {
-        await this.page.waitForTimeout(4000);
+        await this.page.waitForTimeout(2000); //4000
         await this.page.getByRole('button', { name: sel.transactions.Date[this.language] }).click();
         await this.page.getByText(sel.transactions.Today[this.language]).click();
         await this.page.getByRole('button', { name: sel.transactions.Apply[this.language] }).click();

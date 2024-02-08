@@ -2,6 +2,7 @@ import test from '../fixture.config';
 import { expect } from '@playwright/test';
 import { config }  from '../utils/configLoader';
 import { createCardTransaction, getCardDetails, getToken, getRandomDecimalNumber } from '../utils/utils';
+test.describe.configure({ mode: 'serial' });
 
 const username = config.userData.username;
 const password = config.userData.password;

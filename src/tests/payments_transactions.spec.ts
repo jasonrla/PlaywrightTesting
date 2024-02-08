@@ -2,6 +2,7 @@ import test from '../fixture.config';
 import { expect } from '@playwright/test';
 import { config }  from '../utils/configLoader';
 import { getRandomEmail, getRandomName, getAdminToken, getExchangeRate } from '../utils/utils';  
+test.describe.configure({ mode: 'serial' });
 
 test.beforeEach(async ({ page, loginPage, dashboardPage }) => {
   await loginPage.loginSuccessful(config.userData.username, config.userData.password);

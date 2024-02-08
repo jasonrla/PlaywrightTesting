@@ -1,6 +1,7 @@
 import test from '../fixture.config';
 import { expect } from '@playwright/test';
 import { config }  from '../utils/configLoader';
+test.describe.configure({ mode: 'serial' });
 
 test.beforeEach(async ({ page, loginPage, dashboardPage, transactionsPage }) => {
   await loginPage.loginSuccessful(config.userData.username, config.userData.password);

@@ -26,10 +26,6 @@ test(`Make a bill payment`, async ({ page, billsPage}) => {
   await billsPage.clickOnConfirmButton();
   await billsPage.clickOnBackToBillsButton();
 
-
-  //await page.getByRole('gridcell', { name: 'Agua y Drenaje de Monterrey' }).first().click();
-  //await page.getByRole('gridcell', { name: '200.00 MXN' }).click();
-  
 });              
 
 

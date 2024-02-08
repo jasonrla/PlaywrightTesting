@@ -96,7 +96,7 @@ export default class Dashboard {
     
     async filterByCards() {
         await this.page.getByRole('menuitemradio', { name: sel.dashboard.FilterByCards[this.language] }).click();
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForTimeout(2000);
     }
 
     async clickOnFirstCardTransaction(amount: string) {
