@@ -1,6 +1,8 @@
 import test from '../fixture.config';
 import { expect } from '@playwright/test';
 import { config }  from '../utils/configLoader';
+import { getNextDay } from '../utils/utils';
+test.describe.configure({ mode: 'serial' });
 
 test.beforeEach(async ({ page, loginPage, dashboardPage }) => {
   await loginPage.loginSuccessful(config.userData.username, config.userData.password);
@@ -17,7 +19,7 @@ test(`Make a bill payment`, async ({ page, billsPage}) => {
   await billsPage.fillAccountNumber('12345678901234567890123456789012');
   await billsPage.clickOnNextButton();
   await billsPage.fillAmount('45.32');
-  await billsPage.selectDate('8');
+  await billsPage.selectDate(getNextDay());
   await billsPage.clickOnNextButton();
 
   expect(await billsPage.isAmountCorrect('45.32', 'MXN')).toBe(true);

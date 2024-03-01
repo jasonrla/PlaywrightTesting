@@ -22,6 +22,7 @@ export default class TransactionDetails {
     }
 
     async isSuccessNotificationDisplayed(): Promise<boolean> {
+        await this.page.waitForTimeout(2000);
         await this.page.waitForSelector('#chakra-toast-manager-top-right');
         return await this.page.locator('#chakra-toast-manager-top-right').getByText(sel.transactionDetails.NotifText[this.language]).innerText() == sel.transactionDetails.SuccessNotification[this.language];
     }

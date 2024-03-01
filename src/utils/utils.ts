@@ -5,6 +5,11 @@ export const dataPath = 'src/data/';
 
 export type LanguageKey = 'english' | 'spanish';
 
+export function getNextDay(): string {
+  const date = new Date();
+  return (date.getDate() + 1).toString();
+}
+
 export async function getRandomEmail() {
   const random = Math.random().toString(36).substring(7);
   return 'jason.lopez+'+random+'@tribal.credit'

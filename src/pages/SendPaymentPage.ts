@@ -183,7 +183,7 @@ export default class SendPayment {
     }
 
     async isFileUploaded(): Promise<boolean> {
-        await this.page.waitForSelector('body'); // Espera a que el cuerpo de la página esté cargado
+        await this.page.waitForSelector('body');
         const uploadedTransactionsText = sel.send_payment.UploadedTransactions[this.language];
     
         const isTextPresentHandle = await this.page.waitForFunction(

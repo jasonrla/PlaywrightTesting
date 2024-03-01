@@ -8,25 +8,25 @@ const username = config.userData.username;
 const password = config.userData.password;
 const amount = getRandomDecimalNumber();
 
-test.beforeAll(async ({ request }) => {
+//test.beforeAll(async ({ request }) => {
+  
+//});
+
+test.beforeEach(async ({ request, loginPage, dashboardPage }) => {
   const token = await getToken(request, expect, username, password);
   const cardDetails = await getCardDetails(request, expect, config.cardData.cardId, token);
   const lastFourDigits = cardDetails.lastFourDigits;
   const issuerCardId = cardDetails.issuerCardId;
   await createCardTransaction(request, expect, token, lastFourDigits, issuerCardId, amount, amount, '840');
-});
-
-test.beforeEach(async ({ loginPage, dashboardPage }) => {
   await loginPage.loginSuccessful(username, password);
   await dashboardPage.clickOnFiltersButton();
   await dashboardPage.filterByType();
   await dashboardPage.filterByCards();
+  await dashboardPage.clickOnFirstCardTransaction(`${amount} USD`);
 });
 
 test(`Test a PDF file can be added to a Card transaction`, async ({ dashboardPage, transactionDetailsPage }) => {
   const file = config.files.PDF;
-
-  await dashboardPage.clickOnFirstCardTransaction(`${amount} USD`);
   await transactionDetailsPage.uploadFile(file);
 
   expect(await transactionDetailsPage.isSuccessNotificationDisplayed()).toBe(true);
@@ -36,8 +36,6 @@ test(`Test a PDF file can be added to a Card transaction`, async ({ dashboardPag
 
 test(`Test a PNG image can be added to a Card transaction`, async ({ dashboardPage, transactionDetailsPage }) => {
   const file = config.files.PNG;
-
-  await dashboardPage.clickOnFirstCardTransaction(`${amount} USD`);
   await transactionDetailsPage.uploadFile(file);
 
   expect(await transactionDetailsPage.isSuccessNotificationDisplayed()).toBe(true);
@@ -47,8 +45,6 @@ test(`Test a PNG image can be added to a Card transaction`, async ({ dashboardPa
 
 test(`Test a JPG image can be added to a Card transaction`, async ({ dashboardPage, transactionDetailsPage }) => {
   const file = config.files.JPG;
-
-  await dashboardPage.clickOnFirstCardTransaction(`${amount} USD`);
   await transactionDetailsPage.uploadFile(file);
 
   expect(await transactionDetailsPage.isSuccessNotificationDisplayed()).toBe(true);
@@ -58,8 +54,6 @@ test(`Test a JPG image can be added to a Card transaction`, async ({ dashboardPa
 
 test(`Test an XML file can be added to a Card transaction`, async ({ dashboardPage, transactionDetailsPage }) => {
   const file = config.files.XML;
-
-  await dashboardPage.clickOnFirstCardTransaction(`${amount} USD`);
   await transactionDetailsPage.uploadFile(file);
 
   expect(await transactionDetailsPage.isSuccessNotificationDisplayed()).toBe(true);
